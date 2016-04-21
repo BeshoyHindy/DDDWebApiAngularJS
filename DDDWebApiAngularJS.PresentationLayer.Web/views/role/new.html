@@ -1,0 +1,61 @@
+﻿<h2>{{newRoleCtrl.languages.getValue('NewF')}} {{newRoleCtrl.languages.getValue('Role')}}</h2>
+<hr />
+<form novalidate name="newRoleCtrl.form" class="form-horizontal" role="form">
+    <!--antiforgerytoken-->
+
+    <!--general message-->
+    <div ng-hide="newRoleCtrl.message == ''" ng-class="(newRoleCtrl.isSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{newRoleCtrl.message}}
+    </div>
+    <!--general message-->
+
+    <!--name-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': newRoleCtrl.form.name.$invalid && newRoleCtrl.form.name.$dirty, 
+         'has-success': !newRoleCtrl.form.name.$invalid && newRoleCtrl.form.name.$dirty }">
+        <label class="col-md-2 control-label">{{newRoleCtrl.languages.getValue('Name')}}</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="name" ng-model="newRoleCtrl.roleViewModel.name" required ng-minlength="3" ng-maxlength="60" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="newRoleCtrl.form.name.$dirty" class="col-md-4 message">
+            <span ng-show="newRoleCtrl.form.name.$error.required" class="form-control alert alert-danger">
+                {{newRoleCtrl.languages.getValue('RequiredM').replace('{0}', newRoleCtrl.languages.getValue('Name'))}}
+            </span>
+            <span ng-show="newRoleCtrl.form.name.$error.minlength || newRoleCtrl.form.name.$error.maxlength" class="form-control alert alert-danger">
+                {{newRoleCtrl.languages.getValue('Length').replace('{0}', newRoleCtrl.languages.getValue('Name')).replace('{1}', '3').replace('{2}', '60')}}
+            </span>
+        </div>
+    </div>
+    <!--name-->
+
+    <!--roleGroup-->
+    <div class="form-group has-feedback"
+         ng-class="{ 'has-error': newRoleCtrl.form.roleGroup.$error.required && newRoleCtrl.form.roleGroup.$dirty, 
+         'has-success': !newRoleCtrl.form.roleGroup.$error.required && newRoleCtrl.form.roleGroup.$dirty  }">
+        <label class="col-md-2 control-label">{{newRoleCtrl.languages.getValue('Group')}}</label>
+        <div class="col-md-4">
+            <select class="form-control" name="roleGroup" ng-model="newRoleCtrl.roleViewModel.roleGroup" ng-init="newRoleCtrl.roleViewModel.roleGroup=''" required>
+                <option value="">{{newRoleCtrl.languages.getValue('Choose')}}</option>
+                <option value="1">{{newRoleCtrl.languages.getValue('Admin')}}</option>
+                <option value="2">{{newRoleCtrl.languages.getValue('User')}}</option>
+            </select>
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="newRoleCtrl.form.roleGroup.$dirty" class="col-md-4 message">
+            <span ng-show="newRoleCtrl.form.roleGroup.$error.required" class="form-control alert alert-danger">
+                {{newRoleCtrl.languages.getValue('RequiredM').replace('{0}', newRoleCtrl.languages.getValue('Group'))}}
+            </span>
+        </div>
+    </div>
+    <!--roleGroup-->
+
+    <!--button-->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success" ng-click="newRoleCtrl.create()" ng-disabled="newRoleCtrl.form.$invalid">{{newRoleCtrl.languages.getValue('Save')}}</button>
+        </div>
+    </div>
+    <!--button-->
+</form>

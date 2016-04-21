@@ -1,0 +1,71 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* 
+    Set padding to keep content from hitting the edges 
+*/
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* 
+   Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* 
+    ////////////////Input error////////////////
+*/
+.has-error input,
+.has-error select {
+    border: 2px solid #e74c3c !important;
+}
+
+.has-error .glyphicon-ok {
+    display: none;
+}
+
+.has-error .glyphicon-remove {
+    display: normal;
+}
+/* 
+    ////////////////Input error////////////////
+*/
+
+/* 
+    ///////////////Input success///////////////
+*/
+.has-success input,
+.has-success select {
+    border: 2px solid #18bc9c !important;
+}
+
+.has-success .glyphicon-remove {
+    display: none;
+}
+
+.has-success .glyphicon-ok {
+    display: normal;
+}
+/* 
+    ///////////////Input success///////////////
+*/
+
+.message {
+    height: 45px;
+}
+
+.alert {
+    padding: 12px;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+}

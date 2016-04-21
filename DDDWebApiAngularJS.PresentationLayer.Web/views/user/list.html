@@ -1,0 +1,42 @@
+﻿<h2>{{usersCtrl.languages.getValue('Users')}}</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input ng-model="filter" class="form-control" placeholder="{{usersCtrl.languages.getValue('Filter')}}" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>{{usersCtrl.languages.getValue('Name')}}</th>
+                    <th>{{usersCtrl.languages.getValue('Email')}}</th>
+                    <th>{{usersCtrl.languages.getValue('Actions')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in usersCtrl.users | filter: filter">
+                    <td>{{user.name}}</td>
+                    <td>{{user.emailVO.email}}</td>
+                    <td class="text-center">
+                        <a class="btn btn-primary">{{usersCtrl.languages.getValue('Edit')}}</a>
+                        &nbsp;
+                        <a class="btn btn-danger">{{usersCtrl.languages.getValue('Remove')}}</a>
+                        &nbsp;
+                        <div class="btn-group">
+                            <a class="btn btn-default">{{usersCtrl.languages.getValue('Add')}}&nbsp;{{usersCtrl.languages.getValue('Role')}}</a>
+                            <a class="btn btn-danger">{{usersCtrl.languages.getValue('Remove')}}&nbsp;{{usersCtrl.languages.getValue('Role')}}</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿<h2>{{loginCtrl.languages.getValue('Login')}}</h2>
+<hr />
+<form novalidate name="loginCtrl.form" class="form-horizontal" role="form">
+    <!--antiforgerytoken-->
+
+    <!--general message-->
+    <div ng-hide="loginCtrl.message == ''" class="alert alert-danger">
+        {{loginCtrl.message}}
+    </div>
+    <!--general message-->
+
+    <!--email-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': loginCtrl.form.email.$invalid && loginCtrl.form.email.$dirty, 
+         'has-success': !loginCtrl.form.email.$invalid && loginCtrl.form.email.$dirty }">
+        <label class="col-md-2 control-label">{{loginCtrl.languages.getValue('Email')}}</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="email" ng-model="loginCtrl.loginViewModel.email" required ng-minlength="3" ng-maxlength="100" 
+                   pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="loginCtrl.form.email.$dirty" class="col-md-4 message">
+            <span ng-show="loginCtrl.form.email.$error.required" class="form-control alert alert-danger">
+                {{loginCtrl.languages.getValue('RequiredM').replace('{0}', loginCtrl.languages.getValue('Name'))}}
+            </span>
+            <span ng-show="loginCtrl.form.email.$error.minlength || loginCtrl.form.email.$error.maxlength" class="form-control alert alert-danger">
+                {{loginCtrl.languages.getValue('Length').replace('{0}', loginCtrl.languages.getValue('Email')).replace('{1}', '3').replace('{2}', '100')}}
+            </span>
+            <span ng-show="!(loginCtrl.form.email.$error.required) && loginCtrl.form.email.$invalid" class="form-control alert alert-danger">
+                {{loginCtrl.languages.getValue('InvalidM').replace('{0}', loginCtrl.languages.getValue('Email'))}}&nbsp;Ex: user@domain.com
+            </span>
+        </div>
+    </div>
+    <!--email-->
+
+    <!--password-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': loginCtrl.form.password.$invalid && loginCtrl.form.password.$dirty, 
+         'has-success': !loginCtrl.form.password.$invalid && loginCtrl.form.password.$dirty }">
+        <label class="col-md-2 control-label">{{loginCtrl.languages.getValue('Password')}}</label>
+        <div class="col-md-4">
+            <input type="password" id="password" class="form-control" name="password" ng-model="loginCtrl.loginViewModel.password" required ng-minlength="6" ng-maxlength="20"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="loginCtrl.form.password.$dirty" class="col-md-4 message">
+            <span ng-show="loginCtrl.form.password.$error.required" class="form-control alert alert-danger">
+                {{loginCtrl.languages.getValue('RequiredF').replace('{0}', loginCtrl.languages.getValue('Password'))}}
+            </span>
+            <span ng-show="loginCtrl.form.password.$error.minlength || loginCtrl.form.password.$error.maxlength" class="form-control alert alert-danger">
+                {{loginCtrl.languages.getValue('Length').replace('{0}', loginCtrl.languages.getValue('Password')).replace('{1}', '6').replace('{2}', '20')}}
+            </span>
+            <span ng-show="!loginCtrl.form.password.$error.required && !(loginCtrl.form.password.$error.minlength || loginCtrl.form.password.$error.maxlength) && 
+                  loginCtrl.form.password.$invalid"
+                  class="form-control alert alert-danger" style="height: auto;">{{loginCtrl.languages.getValue('PasswordValidation')}}</span>
+        </div>
+    </div>
+    <!--password-->
+
+    <!--button-->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success" ng-click="loginCtrl.login()" ng-disabled="loginCtrl.form.$invalid">{{loginCtrl.languages.getValue('Login')}}</button>
+        </div>
+    </div>
+    <!--button-->
+</form>

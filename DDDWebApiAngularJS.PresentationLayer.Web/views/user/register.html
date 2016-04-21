@@ -1,0 +1,117 @@
+﻿<h2>{{registerCtrl.languages.getValue('Register')}}</h2>
+<hr />
+<form novalidate name="registerCtrl.form" class="form-horizontal" role="form">
+    <!--antiforgerytoken-->
+
+    <!--general message-->
+    <div ng-hide="registerCtrl.message == ''" ng-class="(registerCtrl.isSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+        {{registerCtrl.message}}
+    </div>
+    <!--general message-->
+
+    <!--name-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': registerCtrl.form.name.$invalid && registerCtrl.form.name.$dirty, 
+         'has-success': !registerCtrl.form.name.$invalid && registerCtrl.form.name.$dirty }">
+        <label class="col-md-2 control-label">{{registerCtrl.languages.getValue('Name')}}</label>
+        <div class="col-md-4">
+                <input type="text" class="form-control" name="name" ng-model="registerCtrl.registerViewModel.name" required ng-minlength="3" ng-maxlength="60" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="registerCtrl.form.name.$dirty" class="col-md-4 message">
+            <span ng-show="registerCtrl.form.name.$error.required" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('RequiredM').replace('{0}', registerCtrl.languages.getValue('Name'))}}
+            </span>
+            <span ng-show="registerCtrl.form.name.$error.minlength || registerCtrl.form.name.$error.maxlength" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('Length').replace('{0}', registerCtrl.languages.getValue('Name')).replace('{1}', '3').replace('{2}', '60')}}
+            </span>
+        </div>
+    </div>
+    <!--name-->
+
+    <!--email-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': registerCtrl.form.email.$invalid && registerCtrl.form.email.$dirty, 
+         'has-success': !registerCtrl.form.email.$invalid && registerCtrl.form.email.$dirty }">
+        <label class="col-md-2 control-label">{{registerCtrl.languages.getValue('Email')}}</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="email" ng-model="registerCtrl.registerViewModel.email" required ng-minlength="3" ng-maxlength="100" 
+                   pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="registerCtrl.form.email.$dirty" class="col-md-4 message">
+            <span ng-show="registerCtrl.form.email.$error.required" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('RequiredM').replace('{0}', registerCtrl.languages.getValue('Email'))}}
+            </span>
+            <span ng-show="registerCtrl.form.email.$error.minlength || registerCtrl.form.email.$error.maxlength" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('Length').replace('{0}', registerCtrl.languages.getValue('Email')).replace('{1}', '3').replace('{2}', '100')}}
+            </span>
+            <span ng-show="!(registerCtrl.form.email.$error.required) && registerCtrl.form.email.$invalid" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('InvalidM').replace('{0}', languages.getValue('Email'))}}&nbsp;Ex: user@domain.com
+            </span>
+        </div>
+    </div>
+    <!--email-->
+
+    <!--password-->
+    <div class="form-group has-feedback" 
+         ng-class="{ 'has-error': registerCtrl.form.password.$invalid && registerCtrl.form.password.$dirty, 
+         'has-success': !registerCtrl.form.password.$invalid && registerCtrl.form.password.$dirty }">
+        <label class="col-md-2 control-label">{{registerCtrl.languages.getValue('Password')}}</label>
+        <div class="col-md-4">
+            <input type="password" id="password" class="form-control" name="password" ng-model="registerCtrl.registerViewModel.password" required ng-minlength="6" 
+                   ng-maxlength="20" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" />
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+        </div>
+        <div ng-show="registerCtrl.form.password.$dirty" class="col-md-4 message">
+            <span ng-show="registerCtrl.form.password.$error.required" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('RequiredF').replace('{0}', registerCtrl.languages.getValue('Password'))}}
+            </span>
+            <span ng-show="registerCtrl.form.password.$error.minlength || registerCtrl.form.password.$error.maxlength" class="form-control alert alert-danger">
+                {{registerCtrl.languages.getValue('Length').replace('{0}', registerCtrl.languages.getValue('Password')).replace('{1}', '6').replace('{2}', '20')}}
+            </span>
+            <span ng-show="!registerCtrl.form.password.$error.required && !(registerCtrl.form.password.$error.minlength || registerCtrl.form.password.$error.maxlength) && 
+                  registerCtrl.form.password.$invalid" 
+                  class="form-control alert alert-danger" style="height: auto;">{{registerCtrl.languages.getValue('PasswordValidation')}}</span>
+        </div>
+    </div>
+    <!--password-->
+
+    <!--confirmPassword-->
+    <div class="form-group has-feedback" ng-class="{ 'has-error': registerCtrl.registerViewModel.password != registerCtrl.registerViewModel.confirmPassword && 
+         (registerCtrl.form.confirmPassword.$dirty || registerCtrl.form.password.$dirty) || registerCtrl.form.confirmPassword.$invalid && registerCtrl.form.confirmPassword.$dirty, 
+         'has-success': registerCtrl.registerViewModel.password == registerCtrl.registerViewModel.confirmPassword && registerCtrl.form.confirmPassword.$valid && 
+         registerCtrl.form.confirmPassword.$dirty }">
+        <label class="col-md-2 control-label">{{registerCtrl.languages.getValue('ConfirmPassword')}}</label>
+        <div class="col-md-4">
+            <input type="password" class="form-control" name="confirmPassword" ng-model="registerCtrl.registerViewModel.confirmPassword" required />
+            <i class="glyphicon glyphicon-remove form-control-feedback"></i>
+            <i class="glyphicon glyphicon-ok form-control-feedback"></i>
+        </div>
+        <div class="col-md-4 message">
+            <div ng-show="registerCtrl.form.confirmPassword.$dirty && registerCtrl.form.confirmPassword.$error.required">
+                <span class="form-control alert alert-danger">
+                    {{registerCtrl.languages.getValue('RequiredF').replace('{0}', registerCtrl.languages.getValue('ConfirmPassword'))}}
+                </span>
+            </div>
+            <div ng-show="(registerCtrl.form.confirmPassword.$dirty || registerCtrl.form.password.$dirty) && !registerCtrl.form.confirmPassword.$error.required">
+                <span class="form-control alert alert-danger" ng-show="registerCtrl.registerViewModel.password != registerCtrl.registerViewModel.confirmPassword">
+                    {{registerCtrl.languages.getValue('PasswordDoNotMatch')}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--confirmPassword-->
+
+    <!--button-->
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success" ng-click="registerCtrl.register()" 
+                    ng-disabled="registerCtrl.form.$invalid || registerCtrl.registerViewModel.password != registerCtrl.registerViewModel.confirmPassword">
+                {{registerCtrl.languages.getValue('Register')}}
+            </button>
+        </div>
+    </div>
+    <!--button-->
+</form>
