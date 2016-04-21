@@ -1,2 +1,2 @@
 # DDDWebApiAngularJS
-User control using Domain Driven Design, ASPNET Web Api and AngularJS.
+User control using C#, Domain Driven Design, ASPNET Web Api and AngularJS.
